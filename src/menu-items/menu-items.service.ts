@@ -19,13 +19,16 @@ export class MenuItemsService {
     const filter = categoryId ? { category: categoryId } : {};
     return this.menuItemModel
       .find(filter)
-      .populate('category')
+      .populate('category', 'name section')
       .sort({ sortOrder: 1, name: 1 })
       .exec();
   }
 
   async findOne(id: string) {
-    const item = await this.menuItemModel.findById(id).populate('category').exec();
+    const item = await this.menuItemModel
+      .findById(id)
+      .populate('category', 'name section')
+      .exec();
     if (!item) throw new NotFoundException('Menu item not found');
     return item;
   }
@@ -33,7 +36,7 @@ export class MenuItemsService {
   async update(id: string, dto: UpdateMenuItemDto) {
     const item = await this.menuItemModel
       .findByIdAndUpdate(id, dto, { new: true })
-      .populate('category')
+      .populate('category', 'name section')
       .exec();
     if (!item) throw new NotFoundException('Menu item not found');
     return item;
