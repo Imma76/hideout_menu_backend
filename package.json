@@ -8,7 +8,8 @@
     "start": "node dist/main.js",
     "start:dev": "nest start --watch",
     "start:prod": "node dist/main.js",
-    "seed": "ts-node -r tsconfig-paths/register src/seed.ts"
+    "seed": "ts-node -r tsconfig-paths/register src/seed.ts",
+    "create-admin": "ts-node -r tsconfig-paths/register src/auth/create-admin-user.ts"
   },
   "engines": {
     "node": "22.x"
@@ -20,6 +21,7 @@
     "@nestjs/mapped-types": "^2.0.6",
     "@nestjs/mongoose": "^10.1.0",
     "@nestjs/platform-express": "^10.4.15",
+    "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "mongoose": "^8.9.5",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@nestjs/cli": "^10.4.9",
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.10.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
