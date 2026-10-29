@@ -6,6 +6,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  Matches,
   Min,
 } from 'class-validator';
 
@@ -32,4 +33,14 @@ export class CreateMenuItemDto {
   @IsOptional()
   @IsInt()
   sortOrder?: number;
+
+  // Empty string clears the photo.
+  @IsOptional()
+  @IsString()
+  @Matches(/^(https:\/\/\S+)?$/, { message: 'imageUrl must be an https URL' })
+  imageUrl?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  featured?: boolean;
 }

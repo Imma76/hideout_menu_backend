@@ -22,6 +22,12 @@ export class MenuItem {
 
   @Prop({ default: 0 })
   sortOrder: number;
+
+  @Prop({ trim: true, default: '' })
+  imageUrl: string;
+
+  @Prop({ default: false })
+  featured: boolean;
 }
 
 export const MenuItemSchema = SchemaFactory.createForClass(MenuItem);

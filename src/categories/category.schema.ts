@@ -3,14 +3,14 @@ import { HydratedDocument } from 'mongoose';
 
 export type CategoryDocument = HydratedDocument<Category>;
 
-export type CategorySection = 'food' | 'drinks' | 'ciga';
+export type CategorySection = 'food' | 'drinks' | 'ciga' | 'club';
 
 @Schema({ timestamps: true })
 export class Category {
   @Prop({ required: true, trim: true })
   name: string;
 
-  @Prop({ required: true, enum: ['food', 'drinks', 'ciga'], default: 'food' })
+  @Prop({ required: true, enum: ['food', 'drinks', 'ciga', 'club'], default: 'food' })
   section: CategorySection;
 
   @Prop({ default: 0 })

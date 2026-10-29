@@ -6,7 +6,7 @@ export class CreateCategoryDto {
   @IsNotEmpty()
   name: string;
 
-  @IsIn(['food', 'drinks', 'ciga'])
+  @IsIn(['food', 'drinks', 'ciga', 'club'])
   section: CategorySection;
 
   @IsOptional()
