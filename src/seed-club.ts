@@ -55,7 +55,7 @@ const CLUB: { name: string; items: SeedItem[] }[] = [
       { name: 'Glenmorangie 12 Years', description: 'Single malt', price: 140000 },
       { name: 'Chivas Regal 15 Years', description: 'Blended Scotch', price: 140000 },
       { name: 'Teeling Single Malt', description: 'Irish single malt', price: 120000 },
-      { name: 'Jameson Black Barrel', description: 'Irish whiskey, double-charred barrels', price: 120000 },
+      { name: 'Jameson Black Barrel', description: 'Irish whiskey, double-charred barrels', price: 110000 },
       { name: 'Observatory 20 Years', description: 'Aged whiskey', price: 110000 },
       { name: 'Glenmorangie 10 Years', description: 'The Original single malt', price: 110000 },
       { name: 'Chivas Regal 12 Years', description: 'Blended Scotch', price: 110000 },
@@ -80,7 +80,7 @@ const CLUB: { name: string; items: SeedItem[] }[] = [
       { name: 'Sandeman Sweet Red', description: 'Sweet red', price: 110000 },
     ],
   },
-  { name: 'Gin', items: [{ name: "Hendrick's", description: 'Scottish gin', price: 110000 }] },
+  { name: 'Gin', items: [{ name: "Hendrick's", description: 'Scottish gin', price: 120000 }] },
   {
     name: 'Juice',
     items: [
