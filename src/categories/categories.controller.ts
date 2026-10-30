@@ -12,6 +12,7 @@ import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { BasicAuthGuard } from '../auth/basic-auth.guard';
+import { Admin, AdminScope, assertCanEdit } from '../auth/admin-scope';
 
 @Controller('categories')
 export class CategoriesController {
@@ -19,7 +20,8 @@ export class CategoriesController {
 
   @UseGuards(BasicAuthGuard)
   @Post()
-  create(@Body() dto: CreateCategoryDto) {
+  create(@Admin() admin: AdminScope, @Body() dto: CreateCategoryDto) {
+    assertCanEdit(admin, dto.section);
     return this.categoriesService.create(dto);
   }
 
@@ -35,13 +37,16 @@ export class CategoriesController {
 
   @UseGuards(BasicAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() dto: UpdateCategoryDto) {
+  async update(@Admin() admin: AdminScope, @Param('id') id: string, @Body() dto: UpdateCategoryDto) {
+    assertCanEdit(admin, (await this.categoriesService.findOne(id)).section);
+    if (dto.section) assertCanEdit(admin, dto.section);
     return this.categoriesService.update(id, dto);
   }
 
   @UseGuards(BasicAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Admin() admin: AdminScope, @Param('id') id: string) {
+    assertCanEdit(admin, (await this.categoriesService.findOne(id)).section);
     return this.categoriesService.remove(id);
   }
 }

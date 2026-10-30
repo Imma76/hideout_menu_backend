@@ -3,10 +3,19 @@ import mongoose from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { AdminUser, AdminUserSchema } from './admin-user.schema';
 
+const SECTIONS = ['food', 'drinks', 'ciga', 'club'];
+
 async function createAdminUser() {
-  const [, , username, password] = process.argv;
+  const [, , username, password, sectionsArg = ''] = process.argv;
   if (!username || !password) {
-    console.error('Usage: npm run create-admin -- <username> <password>');
+    console.error('Usage: npm run create-admin -- <username> <password> [sections]');
+    console.error('  sections: comma-separated, e.g. "club". Leave out for full access.');
+    process.exit(1);
+  }
+  const sections = sectionsArg.split(',').map((s) => s.trim()).filter(Boolean);
+  const unknown = sections.filter((s) => !SECTIONS.includes(s));
+  if (unknown.length) {
+    console.error(`Unknown section(s): ${unknown.join(', ')}. Use: ${SECTIONS.join(', ')}`);
     process.exit(1);
   }
 
@@ -18,11 +27,11 @@ async function createAdminUser() {
 
   await AdminUserModel.findOneAndUpdate(
     { username },
-    { username, passwordHash },
+    { username, passwordHash, sections },
     { upsert: true, new: true },
   );
 
-  console.log(`Admin user "${username}" created/updated.`);
+  console.log(`Admin user "${username}" created/updated (${sections.length ? sections.join(', ') + ' only' : 'all sections'}).`);
   await mongoose.disconnect();
 }
 

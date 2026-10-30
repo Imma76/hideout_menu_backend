@@ -5,6 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { AdminScope } from './admin-scope';
 
 @Injectable()
 export class BasicAuthGuard implements CanActivate {
@@ -23,11 +24,13 @@ export class BasicAuthGuard implements CanActivate {
     const username = separatorIndex >= 0 ? decoded.slice(0, separatorIndex) : decoded;
     const password = separatorIndex >= 0 ? decoded.slice(separatorIndex + 1) : '';
 
-    const valid = await this.authService.validate(username, password);
-    if (!valid) {
+    const user = await this.authService.validate(username, password);
+    if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
+    const admin: AdminScope = { username: user.username, sections: user.sections ?? [] };
+    request.admin = admin;
     return true;
   }
 }

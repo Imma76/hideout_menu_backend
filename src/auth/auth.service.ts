@@ -10,9 +10,9 @@ export class AuthService {
     @InjectModel(AdminUser.name) private adminUserModel: Model<AdminUserDocument>,
   ) {}
 
-  async validate(username: string, password: string): Promise<boolean> {
+  async validate(username: string, password: string): Promise<AdminUserDocument | null> {
     const user = await this.adminUserModel.findOne({ username }).exec();
-    if (!user) return false;
-    return bcrypt.compare(password, user.passwordHash);
+    if (!user) return null;
+    return (await bcrypt.compare(password, user.passwordHash)) ? user : null;
   }
 }
