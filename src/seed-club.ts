@@ -80,7 +80,6 @@ const CLUB: { name: string; items: SeedItem[] }[] = [
     ],
   },
   { name: 'Gin', items: [{ name: "Hendrick's", description: 'Scottish gin', price: 100000 }] },
-  { name: 'Irish Cream', items: [{ name: 'Baileys', description: 'Original Irish cream', price: 80000 }] },
   {
     name: 'Juice',
     items: [
