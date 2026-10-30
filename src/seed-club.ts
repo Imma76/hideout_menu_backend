@@ -96,6 +96,15 @@ const CLUB: { name: string; items: SeedItem[] }[] = [
       { name: 'Water', description: '', price: 800 },
     ],
   },
+  {
+    name: 'Small Bites',
+    items: [
+      { name: 'Peppered Goat Meat', description: 'Goat meat in a spicy pepper sauce', price: 12000 },
+      { name: 'Peppered Turkey', description: 'Turkey in a spicy pepper sauce', price: 15000 },
+      { name: 'Peppered Chicken', description: 'Chicken in a spicy pepper sauce', price: 15000 },
+      { name: 'Chicken Kebab', description: 'Grilled chicken skewers · 2 sticks', price: 15000 },
+    ],
+  },
 ];
 
 async function run() {
